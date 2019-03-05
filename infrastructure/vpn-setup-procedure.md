@@ -87,7 +87,7 @@ Type yes to confirm and enter your CA password if you set one earlier.
 Now set up the client. (Note: if you want to configure automated VPN startup, it’s best not to set a password.)
 
 ```
-./easyrsa gen-req client nopass
+sudo ./easyrsa gen-req client nopass
 ```
 
 Hit Enter to leave the common name as client. Now sign it:
@@ -261,4 +261,9 @@ After safely storing the CA key somewhere other than the server, remove both the
 ```
 sudo rm /etc/openvpn/easy-rsa/pki/private/ca.key
 sudo rm /etc/openvpn/keys/ca.key
+```
+
+
+```
+scp -i "~/Downloads/dev-vpn.pem" ec2-user@ec2-34-212-21-226.us-west-2.compute.amazonaws.com/etc/openvpn ~/Downloads
 ```
