@@ -1,7 +1,7 @@
-const process = require('process');
 const childProcess = require('child_process');
 const fs = require('fs');
 const crypto = require('crypto');
+const util = require('util');
 
 module.exports = {
     exec: util.promisify(childProcess.exec),
@@ -14,3 +14,7 @@ module.exports = {
     getObjectFromJsonFile: async (path) => JSON.parse(await this.readFile(path).toString()),
     writeObjectToFile: async (path, object) => await this.writeFile(path, JSON.stringify(object)),
 };
+
+exports.printMsg = function () {
+    console.log("This is a message from the vorprog.utilities package");
+}
