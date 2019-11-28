@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "aphrodite": "^2.4.0",
+    "lodash.mapvalues": "^4.6.0"
+  }
 }
