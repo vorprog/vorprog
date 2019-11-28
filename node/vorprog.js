@@ -7,3 +7,10 @@ module.exports = {
     utilities: utilities,
     validation: validation
 };
+
+// todo: update this master package list
+// todo: update packages to use packages instead of source code
+// todo: create a simple npx "create" app
+// todo: update npx "create" app to use use elemancer, webpack, etc
+// todo: add routing to npx "create" app
+// todo: figure out how to use redux with npx "create" app
