@@ -13,10 +13,10 @@ const validators = {
     bigint: (target) => isType(target, `bigint`),
     string: (target) => isType(target, `string`) && target.trim() !== ``,
     isString: (target) => isType(target, `string`) && target.trim() !== ``,
-    alphaNumeric: (target) => this.isString(target) && /^[a-zA-Z0-9]*$/.test(target),
-    informalPhoneNumber: (target) => this.isString(target) && /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(target),
-    email: (target) => this.isString(target) && /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/.test(target),
-    date: (target) => isType(target, `string`) && target.trim() !== `` && isNaN(Date.parse(target)) == false //todo: why the is isString not recognized as a function?
+    alphaNumeric: (target) => validators.isString(target) && /^[a-zA-Z0-9]*$/.test(target),
+    informalPhoneNumber: (target) => validators.isString(target) && /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(target),
+    email: (target) => validators.isString(target) && /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/.test(target),
+    date: (target) => validators.isString(target) && isNaN(Date.parse(target)) == false
 };
 
 const definedTypes = {};
