@@ -1,6 +1,7 @@
 const map = require('lodash.map')
 
 const isType = (target, type) => target && typeof (target) === type;
+const getProperty = (object, propertyName) => (object && object.hasOwnProperty(propertyName) && object[propertyName]) || null; //todo should this default to null or undefined?
 const arrayTypeSymbol = `[]`;
 
 const validators = {
@@ -21,15 +22,23 @@ const validators = {
 
 const definedTypes = {};
 
+const getValidationInfo = (hierarchy, expectedType, actualValue) => { 
+    return {
+        hierarchy: hierarchy,
+        expectedType: expectedType,
+        actualValue: actualValue
+    };
+}
+
 const getInvalidations = (target, typeName, hierarchy = typeName) => {
-    if (validators[typeName]) return validators[typeName](target) ? null : [ { hierarchy: hierarchy, invalidatedType: typeName}];
+    if (validators[typeName]) return validators[typeName](target) ? null : [getValidationInfo(hierarchy, typeName, target)];
 
     let invalidations = [];
 
     if (typeName.indexOf(arrayTypeSymbol) != -1) {
         let nonArrayTypeName = typeName.replace(arrayTypeSymbol, ``);
 
-        if (!validators.array(target)) return [ { hierarchy: hierarchy, invalidatedType: typeName} ];
+        if (!validators.array(target)) return [getValidationInfo(hierarchy, nonArrayTypeName, target)];
 
         for (i = 0; i < target.length; i++) {
             let innerInvalidations = getInvalidations(target[i], nonArrayTypeName, `${hierarchy}[${i}]`);
@@ -39,12 +48,13 @@ const getInvalidations = (target, typeName, hierarchy = typeName) => {
         return invalidations;
     }
 
-    let definedType = definedTypes[typeName];
+    let definedType = getProperty(definedTypes, typeName);
+    if (!validators.object(definedType)) throw new Error(`${typeName} is not a properly defined type.`);
 
-    if (!definedType) throw new Error(`No type defined for: ${typeName}`);
+    if (!validators.object(target)) return [getValidationInfo(hierarchy, typeName, target)];
 
     map(definedType, (propertyTypeName, propertyName) => {
-        let innerInvalidations = getInvalidations(target && target.hasOwnProperty(propertyName) && target[propertyName] || null, propertyTypeName, `${hierarchy}.${propertyName}`);
+        let innerInvalidations = getInvalidations(getProperty(target, propertyName), propertyTypeName, `${hierarchy}.${propertyName}`);
         if (innerInvalidations) invalidations = invalidations.concat(innerInvalidations);
     });
 

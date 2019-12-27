@@ -55,7 +55,9 @@ let validCar = {
 
 let invalidCar = {
     make: 'ford',
-    model: 'taurus',
+    model: {
+        hello: `world`
+    },
     color: 'blue',
     tires: [
         { expectedLifeSpan: `graa` },
@@ -67,5 +69,5 @@ let invalidCar = {
 
 
 console.log(`Invalidations: ${JSON.stringify(validation.isInvalid(validCar, `car`),null, 2)}`);
-console.log(`Invalidations: ${JSON.stringify(validation.isInvalid(null, `car`), null, 2)}`);
+console.log(`Invalidations: ${JSON.stringify(validation.isInvalid(invalidCar, `car`), null, 2)}`);
 
