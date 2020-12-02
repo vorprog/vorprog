@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Webpack</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+    }
+
+    * {
+      font-weight: 500;
+      font-family: 'Courier New';
+      line-height: 20px;
+      color: #888;
+      background-color: #222;
+    }
+
+    .row {
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: flex-start;
+      text-align: center;
+    }
+
+    .item {
+      overflow: auto;
+      margin: 10px;
+      padding: 10px;
+      border: 2px solid #111;
+      border-radius: 5px;
+    }
+
+    .item::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .item::-webkit-scrollbar-thumb {
+      background: black;
+      border-radius: 5px;
+    }
+
+    .item::-webkit-scrollbar-corner {
+      background-color: #ffffff00;
+    }
+
+
+    .item:hover {
+      background-color: #222;
+    }
+
+    .smallBox {
+      height: '100px';
+      width: '100px';
+    }
+
+    .black {
+      color: #000
+    }
+
+    .grey {
+      color: #222;
+    }
+
+    .green {
+      color: #8f8;
+    }
+
+    .blue {
+      color: #88f;
+    }
+
+    .red {
+      color: #f88;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
