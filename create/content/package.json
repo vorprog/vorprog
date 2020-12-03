@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev-build": "webpack --config=webpack.config.js",
-    "build": "webpack --mode=production --config=webpack.config.js"
+    "start": "webpack --config=webpack.config.js",
+    "prod": "webpack --mode=production --config=webpack.config.js"
   },
   "dependencies": {
     "lodash.map": "^4.6.0",
