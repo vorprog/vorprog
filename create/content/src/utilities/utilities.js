@@ -1,20 +1,24 @@
 const map = require('lodash.map');
 
-module.exports = {
   /**
   * @returns {HTMLElement | SVGElement}
   */
-  newElement: (parent, child = {}) => {
-    const element = document.createElementNS(child.xmlns || `http://www.w3.org/1999/xhtml`, child.tag || `div`);
-    element.textContent = child.textContent || null;
-    if (child.class) element.className = child.class;
+const newElement = (parent, params = {}) => {
+  const element = document.createElementNS(params.xmlns || `http://www.w3.org/1999/xhtml`, params.tag || `div`);
+  element.textContent = params.textContent || null;
+  if (params.class) element.className = params.class;
+  map(params.children, child => newElement(element, child));
 
-    delete child.xmlns;
-    delete child.tag;
-    delete child.textContent;
-    delete child.class;
+  delete params.xmlns;
+  delete params.tag;
+  delete params.textContent;
+  delete params.class;
+  delete params.children;
 
-    map(child, (value, key) => element.setAttribute(key, value || ``));
-    return parent.appendChild(element)
-  }
+  map(params, (value, key) => element.setAttribute(key, value || ``));
+  return parent.appendChild(element)
+}
+
+module.exports = {
+  newElement: newElement
 }

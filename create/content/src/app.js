@@ -1,46 +1,37 @@
 const map = require('lodash.map');
-const pangrams = require('./data/pangrams');
+const randomData = require('./data/randomData');
 const newElement = require('./utilities/utilities').newElement;
-const svgData = require('./data/svg');
 
 const startup = () => {
   console.log(`Document intialized.`);
-  const body = document.body;
+  const dataTable = document.getElementById("data-table")
 
-  const header = newElement(body, { id: `header`, class: `light-grey space-between row` });
+  const tableHeaderRow = newElement(dataTable, { tag: `tr` })
+  const tableHeader1 = newElement(tableHeaderRow, { tag: `td`, id: `column1-header` });
+  newElement(tableHeader1, { class: `resizable`, textContent: `Column 1` });
 
-  const leftHeaderSection = newElement(header, { id: `left-header` });
-  const menuSvg = newElement(leftHeaderSection, { id: `menu`, tag: `svg`, xmlns: `http://www.w3.org/2000/svg`, width: `24`, height: `24`, viewBox: `0 0 24 24` });
-  const menuPath = newElement(menuSvg, { tag: `path`, xmlns: `http://www.w3.org/2000/svg`, d: svgData.menuPath, });
-  const searchSvg = newElement(leftHeaderSection, { id: `search`, tag: `svg`, xmlns: `http://www.w3.org/2000/svg`, width: `24`, height: `24`, viewBox: `0 0 24 24` });
-  const searchPath = newElement(searchSvg, { tag: `path`, xmlns: `http://www.w3.org/2000/svg`, d: svgData.searchPath });
+  const tableHeader2 = newElement(tableHeaderRow, { tag: `td`, id: `column2-header` });
+  newElement(tableHeader2, { class: `resizable`, textContent: `Column 2` });
 
-  const rightHeaderSection = newElement(header, { id: `right-header` });
-  const notificationSvg = newElement(rightHeaderSection, { id: `notifications`, tag: `svg`, xmlns: `http://www.w3.org/2000/svg`, width: `24`, height: `24`, viewBox: `0 0 24 24` });
-  const notificationPath = newElement(notificationSvg, { tag: `path`, xmlns: `http://www.w3.org/2000/svg`, d: svgData.notificationPath });
-  const profileSvg = newElement(rightHeaderSection, { id: `profile`, "on-click": newElement, tag: `svg`, xmlns: `http://www.w3.org/2000/svg`, width: `24`, height: `24`, viewBox: `0 0 24 24` });
-  const profilePath = newElement(profileSvg, { tag: `path`, xmlns: `http://www.w3.org/2000/svg`, d: svgData.profilePath });
+  const tableHeader3 = newElement(tableHeaderRow, { tag: `td`, id: `column3-header` });
+  newElement(tableHeader3, { class: `resizable`, textContent: `Column 3` });
 
-  const settingsMenu = newElement(rightHeaderSection, { id: `settings`, class: `grey popup` });
-  settingsMenu.style.display = `none`;
-  const text = newElement(settingsMenu, { id: `settings-link-1`, textContent: `<insert link here>` });
+  const tableHeader4 = newElement(tableHeaderRow, { tag: `td`, id: `column4-header` });
+  newElement(tableHeader4, { class: `resizable`, textContent: `Column 4` });
 
-  profileSvg.onclick = () => settingsMenu.style.display === `none` ? settingsMenu.style.display = `block` : settingsMenu.style.display = `none`;
-
-  const mainRow = newElement(body, { id: `main-row`, class: `row` });
-
-  const rows = [];
-  let currentRow;
-  const pangramElements = map(pangrams.list, (pangram, index) => {
-    if (index % 4 === 0) {
-      currentRow = newElement(mainRow, { class: `margin-bottom row` });
-      rows.push(currentRow);
-    }
-    return newElement(currentRow, { id: `pangram-${index}`, class: `grey curved`, textContent: pangram + pangram })
+  map(new Array(40), (data, index) => {
+    const someRandomData = randomData();
+    newElement(dataTable, {
+      tag: `tr`,
+      id: `data-${index}`,
+      children: [
+        { tag: `td`, textContent: someRandomData.randomWord },
+        { tag: `td`, textContent: someRandomData.randomPangram },
+        { tag: `td`, textContent: someRandomData.randomInteger },
+        { tag: `td`, textContent: someRandomData.randomGuid },
+      ]
+    });
   });
-
-  const footer = newElement(body, { id: `footer`, class: `grey row` });
-  const footerContent = newElement(footer, { textContent: `FOOTER` });
 };
 
 (async () => {
