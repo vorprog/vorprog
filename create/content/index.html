@@ -14,8 +14,9 @@
       font-weight: 500;
       font-family: 'Courier New';
       line-height: 20px;
-      color: #DDD;
+      color: #BBB;
       overflow: auto;
+      outline: none;
     }
 
     div {
@@ -34,10 +35,14 @@
     }
 
     .padded {
-      padding-top: 5px;
-      padding-bottom: 5px;
-      padding-left: 10px;
-      padding-right: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      padding-left: 3px;
+      padding-right: 3px;
     }
 
     .row {
@@ -82,6 +87,10 @@
 
     table {
       border-collapse: collapse;
+    }
+
+    [contenteditable=true]:empty:before {
+      content: attr(placeholder);
     }
   </style>
 </head>
@@ -149,22 +158,28 @@
     <div id="data-content">
       <div id="action-bar" class="grey-444 row">
         <div id="left-action-bar">
-          <div id="filter" contenteditable="true">filter...</div>
+          <div id="input-filter" class="grey-222 padded curved" style="text-overflow:clip;" contenteditable="true"
+            placeholder="filter . . ."></div>
+          <div class="padded grey-111 curved">Architecture: arm64 X</div>
         </div>
         <div id="right-action-bar">
-          <svg id="add-item" class="padded" width="24" height="24" viewBox="0 0 24 24">
+          <div class="padded">123,456 results</div>
+          <svg id="refresh-results" class="padded curved grey-border" width="24" height="24" viewBox="0 0 24 24">
             <path
-              d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z">
+              d="M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z">
+            </path>
+          </svg>
+          <svg id="add-item" class="padded curved grey-border" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10">
             </path>
           </svg>
 
-          <svg id="remove-item" class="padded" width="24" height="24" viewBox="0 0 24 24">
-            <path
-              d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z">
+          <svg id="remove-item" class="padded curved grey-border" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 10h24v4h-24z">
             </path>
           </svg>
 
-          <svg id="more-options" class="padded" width="24" height="24" viewBox="0 0 24 24">
+          <svg id="more-options" class="padded curved grey-border" width="24" height="24" viewBox="0 0 24 24">
             <use xlink:href="#sort-down-symbol"></use>
           </svg>
         </div>

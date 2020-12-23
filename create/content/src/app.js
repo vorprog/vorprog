@@ -4,7 +4,7 @@ const utilities = require('./utilities/utilities');
 
 const startup = () => {
   console.log(`Document intialized.`);
-  document.getElementById(`filter`).focus();
+  document.getElementById(`input-filter`).focus();
   const dataTable = document.getElementById(`data-table`);
   utilities.newElement(dataTable, {
     tag: `tr`,
